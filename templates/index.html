@@ -24,6 +24,10 @@
                             </li>
                         {% endfor %}
                     </ul>
+                    <form class="form-inline" action="/search" method="GET">
+                        <input class="form-control mr-sm-2" type="text" value="{% if search_query %}{{ search_query }}{% endif %}" placeholder="Szukaj" aria-label="Search" name="q">
+                        <button class="btn btn-outline-success" type="submit">Szukaj</button>
+                    </form>
                 </div>
             </div>
         </nav>

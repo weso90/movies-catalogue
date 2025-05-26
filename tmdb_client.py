@@ -3,6 +3,13 @@ import random
 
 API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZWZkOTYzZjY1ODRiZDJkYzQyZDVjYzg0N2I0ZmQ2MCIsIm5iZiI6MTc0NzMzNjUwOS4wMDMsInN1YiI6IjY4MjYzZDNjMjE4NmQ1YWU3ZWFkYTQzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.o8ManlL1HSBqt2w12oLaGvB46_jfjq_x-SbVXBGH3SE"
 
+movies_list = {
+    'now_playing': 'Now Playing',
+    'popular': 'Popular',
+    'top_rated': 'Top Rated',
+    'upcoming': 'Upcoming'
+}
+
 def get_popular_movies():
     endpoint = "https://api.themoviedb.org/3/movie/popular"
     headers = {
@@ -54,3 +61,13 @@ def get_movies_list(list_type):
     response = requests.get(endpoint, headers=headers)
     response.raise_for_status()
     return response.json()
+
+def search(search_query):
+    base_url = "https://api.themoviedb.org/3/"
+    headers = {
+        "Authorization": f"Bearer {API_TOKEN}"
+    }
+    endpoint = f"{base_url}search/movie?query={search_query}"
+    response = requests.get(endpoint, headers=headers)
+    response = response.json()
+    return response['results']
